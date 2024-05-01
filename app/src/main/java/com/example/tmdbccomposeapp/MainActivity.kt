@@ -9,6 +9,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,11 +17,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -47,49 +50,67 @@ class MainActivity : ComponentActivity() {
                 val viewModel by viewModels<PopularMoviesViewModel>()
                 when (val result = viewModel.popularMoviesState.value) {
                     is UIState.Success -> {
-                        Box(modifier = Modifier
-                            .fillMaxWidth()
-                            .fillMaxHeight()
-                            .background(GreenBlue)
-                            .paint(
-                                painterResource(id = R.drawable.background),
-                                )
-                            )
-                            
-                            
-                        {
-                            
-                        }
-                        LazyColumn(modifier = Modifier.fillMaxSize()) {
-                            item{
-                            }
-                            items(result.data?.results.orEmpty()) {
-                                GlideImage(
-                                    model = "${MOVIE_IMAGE_BASE_URL}${BackdropSize.w300}/${it.posterPath}",
-                                    contentDescription = "title image",
+                        Box(
+                            modifier = Modifier.fillMaxSize().background(GreenBlue)
 
-                                )
-                            }
-
-                            items(result.data?.results.orEmpty()) { result ->
-                                Column(modifier = Modifier.padding(16.dp)) {
-                                    Text(
-                                        text = result.title.orEmpty(),
-                                        modifier = Modifier.padding(bottom = 8.dp)
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .fillMaxHeight(0.4f)
+                                    .background(GreenBlue)
+                                    .paint(
+                                        painterResource(id = R.drawable.background),
+                                        contentScale = ContentScale.FillBounds,
+                                        sizeToIntrinsics = false
                                     )
+                            )
+
+                            LazyColumn(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .background(MaterialTheme.colorScheme.primaryContainer)
+                            ) {
+                                item {
+                                    Image(
+                                        painter = painterResource(id = R.drawable.film_rolls),
+                                        contentDescription = ""
+                                    )
+                                }
+
+                                items(result.data?.results.orEmpty()) { result ->
+                                    Column(modifier = Modifier.padding(16.dp)) {
+
+                                        GlideImage(
+                                            model = "${MOVIE_IMAGE_BASE_URL}${BackdropSize.w300}/${result.backdropPath}",
+                                            contentDescription = "title image",
+                                            modifier = Modifier
+                                                .size(300.dp)
+                                                .padding(12.dp)
+
+                                        )
+
+                                        Text(
+                                            text = result.title.orEmpty(),
+                                            modifier = Modifier.padding(bottom = 8.dp)
+                                        )
+
+                                    }
                                 }
                             }
                         }
                     }
 
 
-                    is UIState.Empty -> {}
-                    is UIState.Error -> {}
-                    is UIState.Loading -> {}
 
+
+                            is UIState.Empty -> {}
+                            is UIState.Error -> {}
+                            is UIState.Loading -> {}
+
+                        }
+                    }
                 }
             }
         }
-    }
-}
 
