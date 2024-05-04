@@ -8,9 +8,8 @@ import javax.inject.Singleton
 @Singleton
 class GetIsSafeFromDataStoreUseCase @Inject constructor(
     private val dataStore: MovieAppDataStore
-)
-{
-    suspend operator fun  invoke(): Flow<Boolean> {
+) {
+     operator fun  invoke() : Flow<Boolean> {
         return dataStore.readOnBoardingState()
 
     }

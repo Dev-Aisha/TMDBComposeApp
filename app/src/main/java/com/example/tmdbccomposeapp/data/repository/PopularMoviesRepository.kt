@@ -4,7 +4,9 @@ import com.example.tmdbccomposeapp.data.remote.MovieApi
 import com.example.tmdbccomposeapp.model.SearchResponse
 import com.example.tmdbccomposeapp.model.UIState
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class PopularMoviesRepository @Inject constructor(
     val moviesApi: MovieApi,
 ) {

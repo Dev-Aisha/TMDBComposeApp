@@ -17,14 +17,14 @@ import com.example.tmdbccomposeapp.presentation.screens.onBoardingScreen.Onboard
 fun NavGraph(navController: NavHostController = rememberNavController()){
     val onBoardingViewModel: OnBoardingViewModel = hiltViewModel()
     NavHost(navController = navController,
-        startDestination = onBoardingViewModel.startDestination)
+        startDestination = onBoardingViewModel.startDestination.orEmpty())
     {
-        composable("OnBoarding"){
+        composable(route = Screens.Onboarding.route){
             OnboardingScreen(onBoardingViewModel, navController)
         }
-        composable("Home"){
+        composable(Screens.Home.route){
             val viewModel = hiltViewModel<PopularMoviesViewModel>()
-            HomeScreen(viewModel, navController)
+            HomeScreen(viewModel, navController = navController)
 
         }
 
@@ -38,3 +38,9 @@ fun NavOptionsBuilder.popUpToTop(navController: NavController) {
         inclusive = true
     }
 }
+
+
+
+
+
+

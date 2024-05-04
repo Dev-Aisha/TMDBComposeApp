@@ -15,7 +15,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
-import com.example.tmdbccomposeapp.data.PreferencesManager
 import com.example.tmdbccomposeapp.presentation.navigation.NavGraph
 import com.example.tmdbccomposeapp.presentation.screens.Popular.HomeScreen
 import com.example.tmdbccomposeapp.presentation.screens.Popular.PopularMoviesViewModel
@@ -40,47 +39,4 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-
-
-
-//    @Composable
-//    fun MyNavigation(context: Context) {
-//        val navController = rememberNavController()
-//        val onBoardingViewModel: OnBoardingViewModel = hiltViewModel()
-//
-//        LaunchedEffect(Unit) {
-//            val isFirstRun = PreferencesManager.isFirstRun(context)
-//            if (isFirstRun) {
-//                navController.navigate("OnBoarding")
-//                PreferencesManager.setFirstRun(context, false)
-//            } else {
-//                navController.navigate("Home")
-//            }
-//        }
-//        NavHost(navController = navController, startDestination = onBoardingViewModel.startDestination) {
-//            composable("OnBoarding") {
-//                OnboardingScreen(navController, navController)
-//            }
-//            composable("Home") {
-//                val viewModel = hiltViewModel<PopularMoviesViewModel>()
-//                HomeScreen(viewModel)
-//            }
-//        }
-//
-//
-//        }
-
-
-
-
-
-
-
-////fun NavOptionsBuilder.popUpToTop(navController: NavController) {
-////    popUpTo(navController.currentBackStackEntry?.destination?.route ?: return){
-////        inclusive = true
-////    }
-//
-//
-//}
 

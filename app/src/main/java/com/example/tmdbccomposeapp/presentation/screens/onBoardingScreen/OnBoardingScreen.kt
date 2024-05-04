@@ -51,15 +51,14 @@ import com.example.tmdbccomposeapp.presentation.navigation.popUpToTop
 
 @Composable
 fun OnboardingScreen(onBoardingViewModel: OnBoardingViewModel, navController: NavHostController) {
-    val onBoardingCompleted by onBoardingViewModel.onboardibgCompleted.collectAsState()
+    val onBoardingCompleted by onBoardingViewModel.onBoardingCompleted.collectAsState()
 
-    val currentPageIndex = remember { mutableStateOf(0) }
     if(onBoardingCompleted){
-        navController.navigate("OnBoarding"){
+        navController.navigate(Screens.Home.route){
             popUpToTop(navController)
             }
         }else {
-
+        val currentPageIndex = remember { mutableStateOf(0) }
         val coroutineScope = rememberCoroutineScope()
 
 
@@ -197,8 +196,8 @@ fun OnboardingScreen(onBoardingViewModel: OnBoardingViewModel, navController: Na
                     TextButton(onClick = {
                         navCon.navigate(Screens.Home.route) {
                             popUpToTop(navCon)
-                            onBoardingViewModel.saveOnBoardingState(true)
                         }
+                        onBoardingViewModel.saveOnBoardingState(true)
                     }) {
                         Text(
                             text = "Skip",
@@ -213,8 +212,8 @@ fun OnboardingScreen(onBoardingViewModel: OnBoardingViewModel, navController: Na
                             } else {
                                 navCon.navigate(Screens.Home.route) {
                                     popUpToTop(navCon)
-                                    onBoardingViewModel.saveOnBoardingState(true)
                                 }
+                                onBoardingViewModel.saveOnBoardingState(true)
 
                             }
                         },

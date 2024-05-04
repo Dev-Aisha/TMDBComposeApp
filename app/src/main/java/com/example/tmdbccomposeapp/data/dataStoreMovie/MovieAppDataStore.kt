@@ -11,21 +11,22 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
 
-const val PREFFERENCES_NAME = "is_first_run"
-private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "my_data_store")
+const val PREFERENCES_NAME = "is_first_run"
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
 class MovieAppDataStore(context: Context) {
-    private val onBoardingScreenKwy = booleanPreferencesKey(name=PREFFERENCES_NAME)
+    private val onBoardingScreenKey = booleanPreferencesKey(name=PREFERENCES_NAME)
     private val dataStore = context.dataStore
 
     suspend fun saveOnBoardingState(showTipsPage: Boolean){
         dataStore.edit { preferences ->
-            preferences[onBoardingScreenKwy] = showTipsPage
+            preferences[onBoardingScreenKey] = showTipsPage
         }
     }
-    suspend fun readOnBoardingState(): Flow<Boolean> {
-        return dataStore.data.map { preferences ->
-            preferences[onBoardingScreenKwy] ?: false
+     fun readOnBoardingState(): Flow<Boolean> {
+        return dataStore.data
+            .map { preferences ->
+            preferences[onBoardingScreenKey] ?: false
         }
 
     }

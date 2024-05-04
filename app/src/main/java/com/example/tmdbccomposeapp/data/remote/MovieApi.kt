@@ -11,9 +11,10 @@ interface MovieApi{
     suspend fun getUpcoming(
         @Query("api_key")
         apiKey: String = BuildConfig.TMDB_API_KEY,
-        @Query("language") language:
-        String = "en-US",
-        @Query("page") page: Int=1,
+        @Query("language")
+        language: String = "en-US",
+        @Query("page")
+        page: Int=1,
     ): Response<SearchResponse>
 
 }
