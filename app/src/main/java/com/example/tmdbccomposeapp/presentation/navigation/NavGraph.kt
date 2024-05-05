@@ -24,7 +24,7 @@ fun NavGraph(navController: NavHostController = rememberNavController()){
         }
         composable(Screens.Home.route){
             val viewModel = hiltViewModel<PopularMoviesViewModel>()
-            HomeScreen(viewModel, navController = navController)
+            HomeScreen(viewModel.popularMoviesState, navController = navController)
 
         }
 
