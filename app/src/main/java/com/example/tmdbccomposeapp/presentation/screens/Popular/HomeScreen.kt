@@ -1,6 +1,7 @@
 package com.example.tmdbccomposeapp.presentation.screens.Popular
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -35,6 +36,7 @@ import com.example.tmdbccomposeapp.R
 import com.example.tmdbccomposeapp.model.BackdropSize
 import com.example.tmdbccomposeapp.model.Results
 import com.example.tmdbccomposeapp.model.UIState
+import com.example.tmdbccomposeapp.presentation.navigation.Screens
 import kotlinx.coroutines.flow.MutableStateFlow
 
 @OptIn(ExperimentalGlideComposeApi::class)
@@ -58,11 +60,13 @@ fun HomeScreen(popularMoviesState: MutableStateFlow<PagingData<Results>>, navCon
                     AsyncImage(
                         model =  "${MOVIE_IMAGE_BASE_URL}${BackdropSize.w300}/${moviePadingItems[index]?.backdropPath}",
                         contentDescription = "title image",
-                        modifier = Modifier
-                            .padding(2.dp),
+                        modifier = Modifier.clickable(onClick ={
+                            navController.navigate(Screens.Detail.route + "/${moviePadingItems[index]?.id}")
+                        }).padding(2.dp),
                         contentScale = ContentScale.FillWidth,
                         error = painterResource(id = R.drawable.ic_launcher_background),
                         placeholder = painterResource(id = R.drawable.ic_launcher_background)
+
 
                     )
                 }

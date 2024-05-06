@@ -13,6 +13,7 @@ sealed class Screens(val route: String){
 
     data object Profile : Screens("Profile")
     data object Search : Screens("Search")
+    data object Detail : Screens("Detail")
 
 
 }
