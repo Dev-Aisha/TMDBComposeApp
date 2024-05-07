@@ -32,6 +32,20 @@ interface MovieApi{
 
     ): Response<MovieDetailsResponse>
 
+    @GET("3/search/multi")
+    suspend fun searchMovie(
+        @Query("query")
+        query: String,
+        @Query("api_key")
+        apiKey: String = BuildConfig.TMDB_API_KEY,
+        @Query("Language")
+        language: String = "en-US",
+        @Query("page")
+        page: Int = 1,
+
+        ): Response<SearchResponse>
+
+
 }
 
 
