@@ -3,8 +3,11 @@ package com.example.tmdbccomposeapp.data.remote
 import com.example.tmdbccomposeapp.BuildConfig
 import com.example.tmdbccomposeapp.model.MovieDetailsResponse
 import com.example.tmdbccomposeapp.model.SearchResponse
+import com.example.tmdbccomposeapp.model.UserAccount
+import com.example.tmdbccomposeapp.model.UserTokenResponse
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -44,6 +47,33 @@ interface MovieApi{
         page: Int = 1,
 
         ): Response<SearchResponse>
+
+    @GET("3/authentication/token/new")
+    suspend fun getUserToken(
+        @Query("api_key")
+        apiKey: String = BuildConfig.TMDB_API_KEY,
+
+        ): Response<UserTokenResponse>
+
+    @POST("3/authentication/session/new")
+    suspend fun getSessionId(
+        @Query("api_key")
+        apiKey: String = BuildConfig.TMDB_API_KEY,
+        @Query("request_token")
+        requestToken: String,
+
+        ): Response<UserTokenResponse>
+
+    @GET("3/account")
+    suspend fun getUserAccount(
+        @Query("api_key")
+        apiKey: String = BuildConfig.TMDB_API_KEY,
+        @Query("session_id")
+        sessionId: String,
+
+        ): Response<UserAccount>
+
+
 
 
 }

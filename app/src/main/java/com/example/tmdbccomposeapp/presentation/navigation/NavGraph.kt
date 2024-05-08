@@ -14,6 +14,8 @@ import com.example.tmdbccomposeapp.presentation.screens.DetailScreen.MovieDetail
 import com.example.tmdbccomposeapp.presentation.screens.DetailScreen.MovieDetailsScreen
 import com.example.tmdbccomposeapp.presentation.screens.Popular.HomeScreen
 import com.example.tmdbccomposeapp.presentation.screens.Popular.PopularMoviesViewModel
+import com.example.tmdbccomposeapp.presentation.screens.Profile.ProfileScreen
+import com.example.tmdbccomposeapp.presentation.screens.Profile.UserProfileViewModel
 import com.example.tmdbccomposeapp.presentation.screens.SearchScreen.SearchScreen
 import com.example.tmdbccomposeapp.presentation.screens.SearchScreen.SearchScreenViewModel
 import com.example.tmdbccomposeapp.presentation.screens.onBoardingScreen.OnBoardingViewModel
@@ -46,6 +48,10 @@ fun NavGraph(navController: NavHostController = rememberNavController()){
         composable(Screens.Search.route) {
             val viewModel = hiltViewModel<SearchScreenViewModel>()
             SearchScreen(navController = navController, searchScreenViewModel = viewModel)
+        }
+        composable(Screens.Profile.route) {
+            val viewModel = hiltViewModel<UserProfileViewModel>()
+            ProfileScreen(viewModel,navController)
         }
     }
 }
